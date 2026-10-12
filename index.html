@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Inspección de Vías</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Enlace al manifiesto para PWA -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <h1>Inspección de Vía</h1>
+        <div id="status-red" class="status offline">Desconectado</div>
+    </header>
+
+    <main>
+        <form id="form-reporte">
+            <!-- Sección 1: Ubicación -->
+            <section class="card">
+                <h2>Ubicación</h2>
+                <button type="button" id="btn-gps" class="btn-secondary">📍 Obtener Coordenadas GPS</button>
+                <p id="txt-gps">Lat: --- | Lng: ---</p>
+                <input type="hidden" id="input-lat">
+                <input type="hidden" id="input-lng">
+                
+                <label>Cadenamiento / KM:</label>
+                <input type="text" id="input-km" placeholder="Ej. KM 145+350" required>
+            </section>
+
+            <!-- Sección 2: Evidencia Visual -->
+            <section class="card">
+                <h2>Fotografía</h2>
+                <label for="input-foto" class="btn-camera">📸 Tomar Foto</label>
+                <input type="file" id="input-foto" accept="image/*" capture="environment" style="display: none;">
+                <img id="preview-foto" style="display: none; width: 100%; margin-top: 10px; border-radius: 8px;">
+            </section>
+
+            <!-- Sección 3: Clasificación -->
+            <section class="card">
+                <h2>Componente y Severidad</h2>
+                <label>Componente Afectado:</label>
+                <select id="select-componente" required>
+                    <option value="" disabled selected>Selecciona un componente...</option>
+                    <option value="riel">Riel</option>
+                    <option value="durmiente">Durmiente / Traviesa</option>
+                    <option value="fijacion">Fijación</option>
+                    <option value="balasto">Balasto</option>
+                    <option value="cambio">Aparato de Vía / Cambio</option>
+                </select>
+
+                <label>Nivel de Severidad:</label>
+                <div class="btn-group">
+                    <input type="radio" id="sev-leve" name="severidad" value="leve" required>
+                    <label for="sev-leve" class="btn-sev btn-leve">Leve</label>
+
+                    <input type="radio" id="sev-mod" name="severidad" value="moderada">
+                    <label for="sev-mod" class="btn-sev btn-mod">Moderada</label>
+
+                    <input type="radio" id="sev-crit" name="severidad" value="critica">
+                    <label for="sev-crit" class="btn-sev btn-crit">Crítica</label>
+                </div>
+                
+                <label>Notas Adicionales:</label>
+                <textarea id="input-notas" rows="3" placeholder="Describe el defecto (opcional)"></textarea>
+            </section>
+
+            <button type="submit" class="btn-primary">💾 Guardar Reporte</button>
+        </form>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
